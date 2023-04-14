@@ -18,5 +18,9 @@
         android:id="@+id/homeFragment"
         android:name="com.example.mod5navcomponent.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
 </navigation>
