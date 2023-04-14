@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     //Ne pas oublier de rajouter le plugin de génération de code pour les
     //Nav component
-    //
+    id 'androidx.navigation.safeargs.kotlin'
     //Ce plugin permet de générer les implémentations "Parcelable"
     id 'kotlin-parcelize'
 }

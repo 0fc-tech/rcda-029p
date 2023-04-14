@@ -17,5 +17,9 @@
         android:id="@+id/editArticleFragment"
         android:name="com.example.cadox.ui.EditArticleFragment"
         android:label="fragment_edit_article"
-        tools:layout="@layout/fragment_edit_article" />
+        tools:layout="@layout/fragment_edit_article" >
+        <argument
+            android:name="article"
+            app:argType="com.example.cadox.bo.Article" />
+    </fragment>
 </navigation>

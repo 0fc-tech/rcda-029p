@@ -55,7 +55,11 @@ class ArticleViewFragment : Fragment() {
             AlertDialog.Builder(requireContext())
                 .setMessage(getString(R.string.label_dialog_modify_article))
                 .setPositiveButton("Oui"){ _, _ ->
-                    findNavController().navigate(R.id.action_view_to_edit)
+                    binding.article?.let {
+                        ArticleViewFragmentDirections.actionViewToEdit(it)
+                            .also { findNavController().navigate(it) }
+                    }
+
                 }
                 .setNegativeButton("Non"){ _, _ -> }
                 .show()
