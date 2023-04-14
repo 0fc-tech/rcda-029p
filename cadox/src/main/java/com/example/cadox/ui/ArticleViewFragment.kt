@@ -1,11 +1,14 @@
 package com.example.cadox.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.cadox.R
@@ -18,6 +21,24 @@ import java.util.*
 
 class ArticleViewFragment : Fragment() {
     private lateinit var binding : FragmentArticleViewBinding
+    val intentSms by lazy { Intent(
+        Intent.ACTION_SENDTO,
+        Uri.parse("sms:0123456789"))
+        .putExtra("sms_body","Pour me faire un cadeau, tu peux m'offrir ça : " +
+            "${binding.article!!.intitule}\n" +
+            "    Cela ne coute que ${binding.article!!.prix} euros " +
+            "et cela me fera vraiment plaisir :) Merci !")
+    }
+    val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){
+                isGranted ->
+            if(isGranted)
+                startActivity(intentSms)
+            else
+                Snackbar.make(
+                    binding.root,(R.string.label_envoi_sms), Snackbar.LENGTH_LONG).show()
+
+        }
 
     //Créé la vue à afficher dans le fragment
     override fun onCreateView(
@@ -50,6 +71,7 @@ class ArticleViewFragment : Fragment() {
 
         binding.imageButtonWeb.setOnClickListener {
             Snackbar.make(it, binding.textViewUrl.text, Snackbar.LENGTH_LONG).show()
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(binding.article!!.url)))
         }
         binding.imageButtonEdit.setOnClickListener {
             AlertDialog.Builder(requireContext())
@@ -65,7 +87,7 @@ class ArticleViewFragment : Fragment() {
                 .show()
         }
         binding.imageButtonSend.setOnClickListener {
-            Snackbar.make(it, getString(R.string.label_envoi_sms), Snackbar.LENGTH_LONG).show()
+            requestPermissionLauncher.launch(android.Manifest.permission.SEND_SMS)
         }
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
