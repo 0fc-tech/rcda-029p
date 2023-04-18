@@ -3,6 +3,7 @@ package com.example.mod7lifecycle
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         }
         binding.lifecycleOwner = this
     }
+
+
 
     //override fun onSaveInstanceState(outState: Bundle) {
     //    super.onSaveInstanceState(outState)
