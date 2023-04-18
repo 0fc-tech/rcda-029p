@@ -9,9 +9,12 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.mod9room.bo.Otter
 import com.example.mod9room.dao.OtterDao
 import com.example.mod9room.dao.OtterDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(val dao: OtterDao): ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(val dao: OtterDao): ViewModel() {
     lateinit var listOtter :List<Otter>
     init {
         viewModelScope.launch {
@@ -25,7 +28,6 @@ class MainViewModel(val dao: OtterDao): ViewModel() {
         }
     }
     companion object {
-
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(
