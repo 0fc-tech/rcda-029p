@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.cadox.R
 import com.example.cadox.bo.Article
+import com.example.cadox.dao.ArticleRepository
 import com.example.cadox.databinding.FragmentArticleViewBinding
 import com.google.android.material.snackbar.Snackbar
 import java.time.Instant
@@ -51,13 +52,7 @@ class ArticleViewFragment : Fragment() {
         //On renvoie la vue "racine" (càd tout le ConstraintLayout) qui va être affichée par le fragment
         return binding.root
     }
-    private val articleSample = Article(1,
-        "Des lunettes de soleil (memory)",
-        "RAY-BAN RB 4259 601/19 51/20",
-        85.0,
-        3,
-        "https://www.optical-center.fr/lunettes-de-soleil/lunettes-de-soleil-RAY-BAN-RB-4259-60119-5120-25318.html?gclid=EAIaIQobChMIitHizMWe5QIVloXVCh1X6gw_EAQYASABEgLu0PD_BwE"
-    )
+    private val articleSample = ArticleRepository.getAllArticleTest()?.getOrNull(3)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
